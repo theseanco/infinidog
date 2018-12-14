@@ -15,15 +15,29 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      list: []
+      list: [true, true, true, true]
     };
   }
 
 
+  componentDidMount() {
+    const addDog = () => {
+      console.log("bang",this.state.list);
+      this.setState((prevState) => ({
+        list: [...prevState.list, true]
+      }))
+    }
+
+    setInterval(() => addDog(), 1000)
+  }
+
   render() {
+
     return (
       <Gradient>
-        <Dog />
+        {this.state.list.map((data, index) => {
+          return <Dog />
+        })}
         <Music />
       </Gradient>
     );

@@ -9,7 +9,8 @@ class Dog extends React.Component {
       isLoaded: false,
       dog: "",
       dogType: '',
-      loaded: false
+      loaded: false,
+      height: Math.random()*window.inerHeight
     }
   }
 
@@ -37,6 +38,7 @@ class Dog extends React.Component {
     console.log("loaded")
   }
 
+
   render() {
 
     let dogRender, showImage = null, divClasses = 'dogDiv paused';
@@ -54,7 +56,7 @@ class Dog extends React.Component {
 
   return(
 
-    <div className={divClasses} style={{top: `${Math.random()*window.innerHeight}px`}} >
+    <div className={divClasses} style={{top: `${this.state.height}px`}} >
     {dogRender}
     </div>
   )
