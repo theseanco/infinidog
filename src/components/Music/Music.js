@@ -7,9 +7,9 @@ const Music = () => {
     <p> this is a sound component and it is stopped, hello </p>
    <Sound
       url="https://github.com/theseanco/infinidog/blob/master/music/rolem_-_Neoishiki.mp3?raw=true"
-      playStatus={Sound.status.STOPPED}
+      playStatus={Sound.status.PLAYING}
       playFromPosition={0 /* in milliseconds */}
-      volume={1}
+      volume={100}
     />
     </div>
   )

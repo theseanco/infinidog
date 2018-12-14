@@ -15,31 +15,45 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      list: [true, true, true, true]
+      list: [true]
     };
   }
 
 
   componentDidMount() {
+    //a function to add dog to the end of the array
     const addDog = () => {
       console.log("bang",this.state.list);
       this.setState((prevState) => ({
         list: [...prevState.list, true]
       }))
     }
+    //
+    // const removeDog = () => {
+    //   console.log("remove dog?")
+    //   this.setState((prevState) => {list: prevState.list.shift()})
+    // }
 
+    //every 1000 add dog
     setInterval(() => addDog(), 1000)
+    //wait for 10s, remove a dog every s
+    // setTimeout(() => setInterval(() => removeDog(), 1000), 10000)
   }
 
   render() {
 
     return (
+      <div>
       <Gradient>
         {this.state.list.map((data, index) => {
           return <Dog />
         })}
-        <Music />
+
       </Gradient>
+
+
+      <Music />
+      </div>
     );
   }
 }

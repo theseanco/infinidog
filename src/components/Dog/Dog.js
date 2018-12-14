@@ -10,7 +10,7 @@ class Dog extends React.Component {
       dog: "",
       dogType: '',
       loaded: false,
-      height: Math.random()*window.inerHeight
+      height: 0
     }
   }
 
@@ -22,12 +22,14 @@ class Dog extends React.Component {
         (result) => {
           let dogType
           result.match(/\.(jpeg|jpg|gif|png|JPG|PNG|JPEG|GIF)$/) === null ? dogType = 'video' : dogType = 'image';
-          console.log(result)
+          console.log(result);
+          let height = Math.random() * window.innerHeight;
 
           this.setState({
             isLoaded: true,
             dog: result,
-            dogType: dogType
+            dogType: dogType,
+            height: height
           })
         }
       )
