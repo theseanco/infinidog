@@ -14,7 +14,6 @@ class App extends Component {
   render() {
     return (
       <Gradient>
-      <h1> lorem </h1>
         <Dog />
         <Music />
       </Gradient>

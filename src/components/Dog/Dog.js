@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './Dog.css'
 
 class Dog extends React.Component {
   constructor(props) {
@@ -7,7 +8,8 @@ class Dog extends React.Component {
       error: null,
       isLoaded: false,
       dog: "",
-      dogType: ''
+      dogType: '',
+      loaded: false
     }
   }
 
@@ -30,24 +32,29 @@ class Dog extends React.Component {
       )
   }
 
+  handleImageLoaded() {
+    this.setState({loaded: true})
+    console.log("loaded")
+  }
+
   render() {
 
-    let dogRender
+    let dogRender, showImage = null;
 
     if(this.state.dogType === 'image') {
-      dogRender = <img src={this.state.dog}/>
+      dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)}/>
     } else if (this.state.dogType === 'video') {
-      dogRender = <video src={this.state.dog} autoPlay loop/>
+      dogRender = <video src={this.state.dog} autoPlay loop />
     } else {
       dogRender = null
     }
 
+    const style = this.state.loaded ? {} : {visibility: 'hidden', animationPlayState: 'play', top: '100px'};
+
   return(
-    <div>
-    <p> Dog</p>
 
+    <div className="dogDiv" style={style}>
     {dogRender}
-
     </div>
   )
 }

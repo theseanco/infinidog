@@ -23,7 +23,9 @@ class Gradient extends React.Component {
     const newNum = (oldNum+1)%100;
     if (newNum === 0) {
       let gradients = this.state.gradientArray;
+      //remove last color
       gradients.pop();
+      //add random color to the start of the array
       gradients.unshift(infiniteGradients.randomColor())
       console.log(gradients)
       this.setState({gradientArray: gradients})
