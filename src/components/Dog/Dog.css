@@ -12,19 +12,25 @@
   position: absolute;
   max-height: 30%;
   max-width: 25%;
-  animation-play-state: play;
+  animation-duration: 3s;
   animation-name: slidein;
-  animation-duration: 3s
+  animation-fill-mode: forwards;
 }
+
+.paused {
+  animation-play-state: paused !important
+}
+
+
 
 @keyframes slidein {
   from {
-    margin-left: 100%;
-    width: 300%;
+    margin-left: -30%;
+    width: 100%;
   }
 
   to {
-    margin-left: 0%;
-    width: 100%;
+    margin-left: 100%;
+    width: 300%;
   }
 }

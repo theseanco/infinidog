@@ -39,7 +39,7 @@ class Dog extends React.Component {
 
   render() {
 
-    let dogRender, showImage = null;
+    let dogRender, showImage = null, divClasses = 'dogDiv paused';
 
     if(this.state.dogType === 'image') {
       dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)}/>
@@ -49,11 +49,12 @@ class Dog extends React.Component {
       dogRender = null
     }
 
-    const style = this.state.loaded ? {} : {visibility: 'hidden', animationPlayState: 'play', top: '100px'};
+    // const style = this.state.loaded ? {} : {visibility: 'hidden'};
+    this.state.loaded ? divClasses = 'dogDiv' : divClasses = 'dogDiv paused'
 
   return(
 
-    <div className="dogDiv" style={style}>
+    <div className={divClasses} style={{top: `${Math.random()*window.innerHeight}px`}} >
     {dogRender}
     </div>
   )
