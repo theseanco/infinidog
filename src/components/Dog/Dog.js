@@ -1,3 +1,9 @@
+/*
+
+This component renders a single dog!
+
+*/
+
 import React, {Component} from 'react'
 import './Dog.css'
 
@@ -33,12 +39,13 @@ class Dog extends React.Component {
             isLoaded: true,
             dog: result,
             dogType: dogType,
-            height: height
+            height: height,
           })
         }
       )
       //set state to be written to animation duration
       this.setState({animation: randomNum})
+      // setTimeout(() => dogRender = null)
   }
 
   handleImageLoaded() {
