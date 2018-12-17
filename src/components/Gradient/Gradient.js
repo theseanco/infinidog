@@ -19,6 +19,7 @@ class Gradient extends React.Component {
   }
 
   tick() {
+    //This tick is used to re-render the gradient in the next fram
     const oldNum = this.state.thisNum;
     const newNum = (oldNum+1)%100;
     if (newNum === 0) {
@@ -27,7 +28,7 @@ class Gradient extends React.Component {
       gradients.pop();
       //add random color to the start of the array
       gradients.unshift(infiniteGradients.randomColor())
-      console.log(gradients)
+      // console.log(gradients)
       this.setState({gradientArray: gradients})
     }
     this.setState({thisNum: newNum});

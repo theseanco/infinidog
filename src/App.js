@@ -1,4 +1,5 @@
-import Music from './components/Music/Music'
+import Music from './containers/Music/Music'
+import SoundModule from './components/SoundModule/SoundModule'
 import Dog from './components/Dog/Dog'
 import DogSpawner from './containers/DogSpawner/DogSpawner'
 import Gradient from './components/Gradient/Gradient'
@@ -16,11 +17,16 @@ class App extends Component {
   render() {
 
     return (
+      <div>
       <div className="backgroundDiv">
       <Gradient>
       <DogSpawner />
       </Gradient>
       <Music />
+      </div>
+      {/*
+      <SoundModule />
+      */}
       </div>
     );
   }

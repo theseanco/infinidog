@@ -16,7 +16,7 @@
 
 .dogDiv {
   position: absolute;
-  max-height: 30%;
+  max-height: 25%;
   max-width: 25%;
   animation-duration: 8s;
   animation-name: slidein;
