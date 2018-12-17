@@ -26,28 +26,29 @@ class Dog extends React.Component {
     const randomNum = (Math.random() * 15) + 6
     //fetch dog picture
     fetch("https://random.dog/woof.json")
-      .then(res => res.json())
-      .then(res => res.url)
-      .then(
-        (result) => {
-          let dogType
-          result.match(/\.(jpeg|jpg|gif|png|JPG|PNG|JPEG|GIF)$/) === null ? dogType = 'video' : dogType = 'image';
-          console.log(result);
-          let height = Math.random() * window.innerHeight;
+    .then(res => res.json())
+    .then(res => res.url)
+    .then(
+      (result) => {
+        let dogType
+        result.match(/\.(jpeg|jpg|gif|png|JPG|PNG|JPEG|GIF)$/) === null ? dogType = 'video' : dogType = 'image';
+        console.log(result);
+        //height is max 80% of window height, so that dogs don't render offscreen,
+        let height = Math.random() * (window.innerHeight*0.8);
 
-          this.setState({
-            isLoaded: true,
-            dog: result,
-            dogType: dogType,
-            height: height,
-            renderComponent: true
-          })
-        }
-      )
-      //set state to be written to animation duration
-      this.setState({animation: randomNum})
-      //after 10 seconds, render null
-      setTimeout(() => this.setState({renderComponent: false}), 10000)
+        this.setState({
+          isLoaded: true,
+          dog: result,
+          dogType: dogType,
+          height: height,
+          renderComponent: true
+        })
+      }
+    )
+    //set state to be written to animation duration
+    this.setState({animation: randomNum})
+    //after 21 seconds (max animation time), render null
+    setTimeout(() => this.setState({renderComponent: false}), 21000)
 
   }
 
@@ -64,7 +65,7 @@ class Dog extends React.Component {
     if(this.state.dogType === 'image') {
       dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)}/>
     } else if (this.state.dogType === 'video') {
-      dogRender = <video src={this.state.dog} autoPlay loop />
+      dogRender = <video src={this.state.dog} autoPlay loop muted/>
     } else {
       dogRender = null
     }
@@ -78,16 +79,17 @@ class Dog extends React.Component {
       divClasses = 'dogDiv'
     }
 
+    //conditional rendering - using setTimeout to "unmount" components after x seconds
     if (renderComponent) {
-  return(
-    <div className={divClasses} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
-    {dogRender}
-    </div>
-  )
-} else {
-  return null
-}
-}
+      return(
+        <div className={divClasses} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
+        {dogRender}
+        </div>
+      )
+    } else {
+      return null
+    }
+  }
 }
 
 export default Dog
