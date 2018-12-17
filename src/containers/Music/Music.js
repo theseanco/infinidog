@@ -41,11 +41,8 @@ class Music extends Component {
     <button className="muteButton" type="button" onClick={() => pausePlayButton()}><i className={className}/></button>
     <Sound
       url="https://github.com/theseanco/infinidog/blob/master/music/rolem_-_Neoishiki.mp3?raw=true"
-      playStatus={soundPlaying}
+      playStatus={Sound.status.STOPPED}
       playFromPosition={0 /* in milliseconds */}
-      onPause={() => console.log('Paused')}
-      onResume={() => console.log('Resumed')}
-      onStop={() => console.log('Stopped')}
       volume={80}
     />
     </div>

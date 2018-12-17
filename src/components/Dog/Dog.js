@@ -6,6 +6,7 @@ This component renders a single dog!
 
 import React, {Component} from 'react'
 import './Dog.css'
+import PageVisibility from 'react-page-visibility'
 
 class Dog extends React.Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class Dog extends React.Component {
       dogType: '',
       loaded: false,
       height: 0,
-      animationDuration: 6
+      animationDuration: 6,
+      isVisible: true
     }
   }
 
@@ -36,6 +38,7 @@ class Dog extends React.Component {
         //height is max 80% of window height, so that dogs don't render offscreen,
         let height = Math.random() * (window.innerHeight*0.8);
 
+        //offload results from API call to state
         this.setState({
           isLoaded: true,
           dog: result,
@@ -54,13 +57,21 @@ class Dog extends React.Component {
 
   handleImageLoaded() {
     this.setState({loaded: true})
-    // console.log("loaded")
+  }
+
+  handleVisibilityChange = isVisible => {
+    this.setState({ isVisible: isVisible })
+    // console.log("should dogs be animating", isVisible)
   }
 
 
   render() {
 
-    let dogRender, showImage = null, divClasses = 'dogDiv paused', renderComponent = this.state.renderComponent;
+    let dogRender,
+    showImage = null,
+    divClasses = 'dogDiv paused',
+    renderComponent = this.state.renderComponent,
+    visibleClasses = '';
 
     if(this.state.dogType === 'image') {
       dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)}/>
@@ -70,21 +81,25 @@ class Dog extends React.Component {
       dogRender = null
     }
 
-    // const style = this.state.loaded ? {} : {visibility: 'hidden'};
     //check if an image is loaded, then apply the right classes
     this.state.loaded ? divClasses = 'dogDiv' : divClasses = 'dogDiv paused'
-
     //check if the source file is a video, then apply the right classes
     if(!this.state.loaded && this.state.dogType === 'video') {
       divClasses = 'dogDiv'
     }
+    //check if the dog is visible
+    this.state.isVisible ? visibleClasses = '' : visibleClasses = 'notVisible';
+
+    console.log(`${divClasses} ${visibleClasses}`)
 
     //conditional rendering - using setTimeout to "unmount" components after x seconds
     if (renderComponent) {
       return(
-        <div className={divClasses} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
-        {dogRender}
-        </div>
+        <PageVisibility onChange={this.handleVisibilityChange}>
+          <div className={`${divClasses} ${visibleClasses}`} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
+            {dogRender}
+          </div>
+        </PageVisibility>
       )
     } else {
       return null

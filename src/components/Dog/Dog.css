@@ -31,6 +31,9 @@
   animation-delay: 10s
 }
 
+.notVisible {
+  animation-play-state: paused 
+}
 
 
 @keyframes slidein {
