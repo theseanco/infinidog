@@ -10,11 +10,15 @@ class Dog extends React.Component {
       dog: "",
       dogType: '',
       loaded: false,
-      height: 0
+      height: 0,
+      animationDuration: 6
     }
   }
 
   componentDidMount() {
+    //on mount, generate random number that will dictate animation length
+    const randomNum = (Math.random() * 15) + 6
+    //fetch dog picture
     fetch("https://random.dog/woof.json")
       .then(res => res.json())
       .then(res => res.url)
@@ -33,6 +37,8 @@ class Dog extends React.Component {
           })
         }
       )
+      //set state to be written to animation duration
+      this.setState({animation: randomNum})
   }
 
   handleImageLoaded() {
@@ -54,11 +60,17 @@ class Dog extends React.Component {
     }
 
     // const style = this.state.loaded ? {} : {visibility: 'hidden'};
+    //check if an image is loaded, then apply the right classes
     this.state.loaded ? divClasses = 'dogDiv' : divClasses = 'dogDiv paused'
+
+    //check if the source file is a video, then apply the right classes
+    if(!this.state.loaded && this.state.dogType === 'video') {
+      divClasses = 'dogDiv'
+    }
 
   return(
 
-    <div className={divClasses} style={{top: `${this.state.height}px`}} >
+    <div className={divClasses} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
     {dogRender}
     </div>
   )

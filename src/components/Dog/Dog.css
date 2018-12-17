@@ -1,3 +1,9 @@
+/*initialise a CSS variable*/
+:root {
+  --animation-time: 2s;
+}
+
+
 .dogDiv img {
   width: 100%;
   height: auto
@@ -12,7 +18,7 @@
   position: absolute;
   max-height: 30%;
   max-width: 25%;
-  animation-duration: 6s;
+  animation-duration: 8s;
   animation-name: slidein;
   animation-fill-mode: forwards;
 }
@@ -21,16 +27,20 @@
   animation-play-state: paused !important
 }
 
+.delay {
+  animation-delay: 10s
+}
+
 
 
 @keyframes slidein {
   from {
-    margin-left: -30%;
+    margin-left: -50%;
     width: 100%;
   }
 
   to {
-    margin-left: 100%;
+    margin-left: 150%;
     width: 300%;
   }
 }
