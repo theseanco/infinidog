@@ -1,0 +1,12 @@
+.muteButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 2rem;
+  width: 3rem;
+  z-index: 999;
+}

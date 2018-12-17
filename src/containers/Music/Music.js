@@ -1,33 +1,23 @@
 import React, {Component} from 'react';
 import Sound from 'react-sound';
+import SoundModule from '../../components/SoundModule/SoundModule'
 import './Music.css'
-
-/*
-
-classes for mute/play button
-
-play:
-fas fa-volume-upp
-
-mute:
-fas fa-volume-mute
-
-*/
 
 class Music extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      playing: true
+      playing: true,
+      volume: 80,
     }
   }
 
   render() {
-    let volume, className;
+    let soundPlaying, className;
 
     //invert previous state (without mutating it)
-    const mutePlayButton = () => {
+    const pausePlayButton = () => {
       this.setState((prevState) => {
         const newState = !prevState.playing
         return(
@@ -38,22 +28,25 @@ class Music extends Component {
 
     //is the sound playing?
     if(this.state.playing){
-      volume = 80;
+      soundPlaying = Sound.status.PLAYING;
       className = "fas fa-volume-up"
     } else  {
-        volume = 0;
+        soundPlaying = Sound.status.PAUSED;
         className = "fas fa-volume-mute"
       }
 
 
   return(
     <div>
-    <button className="muteButton" type="button" onClick={() => mutePlayButton()}><i className={className}/></button>
-   <Sound
+    <button className="muteButton" type="button" onClick={() => pausePlayButton()}><i className={className}/></button>
+    <Sound
       url="https://github.com/theseanco/infinidog/blob/master/music/rolem_-_Neoishiki.mp3?raw=true"
-      playStatus={Sound.status.PLAYING}
+      playStatus={soundPlaying}
       playFromPosition={0 /* in milliseconds */}
-      volume={volume}
+      onPause={() => console.log('Paused')}
+      onResume={() => console.log('Resumed')}
+      onStop={() => console.log('Stopped')}
+      volume={80}
     />
     </div>
   )
