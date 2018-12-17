@@ -32,7 +32,7 @@ class Dog extends React.Component {
       (result) => {
         let dogType
         result.match(/\.(jpeg|jpg|gif|png|JPG|PNG|JPEG|GIF)$/) === null ? dogType = 'video' : dogType = 'image';
-        console.log(result);
+        // console.log(result);
         //height is max 80% of window height, so that dogs don't render offscreen,
         let height = Math.random() * (window.innerHeight*0.8);
 
@@ -54,7 +54,7 @@ class Dog extends React.Component {
 
   handleImageLoaded() {
     this.setState({loaded: true})
-    console.log("loaded")
+    // console.log("loaded")
   }
 
 

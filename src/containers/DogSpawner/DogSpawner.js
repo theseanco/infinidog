@@ -13,7 +13,7 @@ class DogSpawner extends Component {
     componentDidMount() {
     //a function to add dog to the end of the array
     const addDog = () => {
-      console.log("bang",this.state.list);
+      // console.log("bang",this.state.list);
       this.setState((prevState) => ({
         list: [...prevState.list, <Dog />]
       }))
@@ -31,7 +31,7 @@ class DogSpawner extends Component {
     }
 
     //every 1000 add dog
-    setInterval(() => addDog(), 700)
+    setInterval(() => addDog(), 7000)
     //wait for 10s, remove a dog every second thereafter
     // setTimeout(() => setInterval(() => removeDog(), 1000), 10000)
   }
