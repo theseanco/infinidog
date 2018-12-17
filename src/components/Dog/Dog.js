@@ -40,12 +40,15 @@ class Dog extends React.Component {
             dog: result,
             dogType: dogType,
             height: height,
+            renderComponent: true
           })
         }
       )
       //set state to be written to animation duration
       this.setState({animation: randomNum})
-      // setTimeout(() => dogRender = null)
+      //after 10 seconds, render null
+      setTimeout(() => this.setState({renderComponent: false}), 10000)
+
   }
 
   handleImageLoaded() {
@@ -56,7 +59,7 @@ class Dog extends React.Component {
 
   render() {
 
-    let dogRender, showImage = null, divClasses = 'dogDiv paused';
+    let dogRender, showImage = null, divClasses = 'dogDiv paused', renderComponent = this.state.renderComponent;
 
     if(this.state.dogType === 'image') {
       dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)}/>
@@ -75,12 +78,15 @@ class Dog extends React.Component {
       divClasses = 'dogDiv'
     }
 
+    if (renderComponent) {
   return(
-
     <div className={divClasses} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
     {dogRender}
     </div>
   )
+} else {
+  return null
+}
 }
 }
 
