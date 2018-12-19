@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import Dog from '../../components/Dog/Dog';
 import PageVisibility from 'react-page-visibility';
+import { connect } from 'react-redux';
 
 class DogSpawner extends Component {
 
   constructor(props){
     super(props);
+    //list starts with a Dog in it, to get it preloaded.
     this.state = {
       list: [],
       visible: true
@@ -16,7 +18,7 @@ class DogSpawner extends Component {
     //a function to add dog to the end of the array
     const addDog = () => {
       // console.log("bang",this.state.list);
-      if (this.state.visible) {
+      if (this.state.visible && !this.props.windowOpen) {
         this.setState((prevState) => ({
           list: [...prevState.list, <Dog />]
         }))
@@ -38,6 +40,8 @@ class DogSpawner extends Component {
       setInterval(() => addDog(), 8000)
       //wait for 10s, remove a dog every second thereafter
       // setTimeout(() => setInterval(() => removeDog(), 1000), 10000)
+      //add a dog when the component has mounted, which will be paused by redux state
+      addDog()
     }
 
     handleVisibilityChange = isVisible => {
@@ -59,4 +63,10 @@ class DogSpawner extends Component {
     }
   }
 
-  export default DogSpawner
+const mapStateToProps = state => {
+  return {
+    windowOpen: state.windowClose.windowOpen
+  }
+}
+
+export default connect(mapStateToProps,null)(DogSpawner)

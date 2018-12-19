@@ -1,5 +1,9 @@
-import React from 'react'
-import './IntroModal.css'
+import React from 'react';
+import './IntroModal.css';
+
+//redux goods
+import {connect} from 'react-redux';
+import * as actionTypes from '../../store/actions'
 
 
 const componentClasses = ['overlay-styling'];
@@ -15,6 +19,7 @@ class Overlay extends React.Component {
 
 
   render() {
+    const {closeWindow} = this.props
 
   if (this.state.hide) {componentClasses.push('hide')};
 
@@ -35,7 +40,7 @@ class Overlay extends React.Component {
         </p>
 
 
-        <button className="closeButton vibrate-2" onClick={() => {this.setState({hide: true})}}>Start</button>
+        <button className="closeButton vibrate-2" onClick={() => {this.setState({hide: true}); closeWindow()}}>Start</button>
        </div>
 
      </div>
@@ -45,4 +50,10 @@ class Overlay extends React.Component {
 }
 }
 
-export default Overlay
+const mapDispatchToProps = dispatch => {
+  return {
+    closeWindow: () => dispatch({type:actionTypes.CLOSE_INTRO_WINDOW})
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Overlay)

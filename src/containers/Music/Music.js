@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Sound from 'react-sound';
 import SoundModule from '../../components/SoundModule/SoundModule'
 import './Music.css'
+import { connect } from 'react-redux';
 
 class Music extends Component {
 
@@ -27,7 +28,7 @@ class Music extends Component {
     }
 
     //is the sound playing?
-    if(this.state.playing){
+    if(this.state.playing && !this.props.windowOpen){
       soundPlaying = Sound.status.PLAYING;
       className = "fas fa-volume-up"
     } else  {
@@ -41,7 +42,7 @@ class Music extends Component {
     <button className="muteButton" type="button" onClick={() => pausePlayButton()}><i className={className}/></button>
     <Sound
       url="https://github.com/theseanco/infinidog/blob/master/music/rolem_-_Neoishiki.mp3?raw=true"
-      playStatus={Sound.status.STOPPED}
+      playStatus={soundPlaying}
       playFromPosition={0 /* in milliseconds */}
       volume={80}
     />
@@ -50,4 +51,10 @@ class Music extends Component {
 }
 }
 
-export default Music
+const mapStateToProps = state => {
+  return {
+    windowOpen: state.windowClose.windowOpen
+  }
+}
+
+export default connect(mapStateToProps,null)(Music)

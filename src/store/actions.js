@@ -1,0 +1,1 @@
+export const CLOSE_INTRO_WINDOW = 'CLOSE_INTRO_WINDOW';
