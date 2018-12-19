@@ -7,6 +7,8 @@ This component renders a single dog!
 import React, {Component} from 'react'
 import './Dog.css'
 import PageVisibility from 'react-page-visibility'
+import { connect } from 'react-redux';
+
 
 class Dog extends React.Component {
   constructor(props) {
@@ -67,6 +69,10 @@ class Dog extends React.Component {
 
   render() {
 
+    const {
+      windowOpen
+    } = this.props
+
     let dogRender,
     showImage = null,
     divClasses = 'dogDiv paused',
@@ -81,8 +87,8 @@ class Dog extends React.Component {
       dogRender = null
     }
 
-    //check if an image is loaded, then apply the right classes
-    this.state.loaded ? divClasses = 'dogDiv' : divClasses = 'dogDiv paused'
+    //check if an image is loaded and the intro modal is closed, then apply the right classes
+    this.state.loaded && !windowOpen ? divClasses = 'dogDiv' : divClasses = 'dogDiv paused'
     //check if the source file is a video, then apply the right classes
     if(!this.state.loaded && this.state.dogType === 'video') {
       divClasses = 'dogDiv'
@@ -107,4 +113,10 @@ class Dog extends React.Component {
   }
 }
 
-export default Dog
+const mapStateToProps = state => {
+  return {
+    windowOpen: state.windowClose.windowOpen
+  }
+}
+
+export default connect(mapStateToProps,null)(Dog)
