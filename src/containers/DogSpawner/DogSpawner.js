@@ -35,7 +35,7 @@ class DogSpawner extends Component {
       }
 
       //every 1000 add dog
-      setInterval(() => addDog(), 1000)
+      setInterval(() => addDog(), 8000)
       //wait for 10s, remove a dog every second thereafter
       // setTimeout(() => setInterval(() => removeDog(), 1000), 10000)
     }
