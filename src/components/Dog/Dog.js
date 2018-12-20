@@ -20,8 +20,7 @@ class Dog extends React.Component {
       dogType: '',
       loaded: false,
       height: 0,
-      animationDuration: 6,
-      isVisible: true
+      animationDuration: 6
     }
   }
 
@@ -59,12 +58,6 @@ class Dog extends React.Component {
     this.setState({loaded: true})
   }
 
-  handleVisibilityChange = isVisible => {
-    this.setState({ isVisible: isVisible })
-    // console.log("should dogs be animating", isVisible)
-  }
-
-
   render() {
 
     const {
@@ -92,16 +85,14 @@ class Dog extends React.Component {
       divClasses = 'dogDiv'
     }
     //check if the dog is visible
-    this.state.isVisible ? visibleClasses = '' : visibleClasses = 'notVisible';
+    this.props.isVisible ? visibleClasses = '' : visibleClasses = 'notVisible';
 
     //conditional rendering - using setTimeout to "unmount" components after x seconds
     if (renderComponent) {
       return(
-        <PageVisibility onChange={this.handleVisibilityChange}>
           <div className={`${divClasses} ${visibleClasses}`} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
             {dogRender}
           </div>
-        </PageVisibility>
       )
     } else {
       return null
@@ -111,7 +102,8 @@ class Dog extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    windowOpen: state.windowClose.windowOpen
+    windowOpen: state.windowClose.windowOpen,
+    isVisible: state.windowVisibility.isVisible
   }
 }
 

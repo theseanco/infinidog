@@ -38,6 +38,9 @@ class Overlay extends React.Component {
         <p>
         Music by <a href="http://freemusicarchive.org/music/Rolemusic/~/Neoishiki_1412">Rolemusic</a>.
         </p>
+        <p>
+        Code by <a href="https://github.com/theseanco/infinidog">theseanco</a>.
+        </p>
 
 
         <button className="closeButton vibrate-2" onClick={() => {this.setState({hide: true}); closeWindow()}}>Start</button>

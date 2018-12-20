@@ -8,10 +8,12 @@ import * as serviceWorker from './serviceWorker';
 
 import closeWindowReducer from './store/reducers/closeWindowReducer';
 import pausePlayReducer from './store/reducers/pausePlayReducer';
+import windowVisibilityReducer from './store/reducers/windowVisibilityReducer';
 
 const reducerFunction = combineReducers({
   windowClose: closeWindowReducer,
-  pausePlay: pausePlayReducer
+  pausePlay: pausePlayReducer,
+  windowVisibility: windowVisibilityReducer
 })
 
 const store = createStore(reducerFunction);
