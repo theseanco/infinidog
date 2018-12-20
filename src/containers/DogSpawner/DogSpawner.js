@@ -9,55 +9,55 @@ class DogSpawner extends Component {
     super(props);
     //list starts with a Dog in it, to get it preloaded.
     this.state = {
-      list: [],
-      visible: true
+      list: []
     };
   }
 
   componentDidMount() {
+    //variables controlling the rate at which dogs are spawned.
+    let spawnTime = 700, maxDogs = 30;
     //a function to add dog to the end of the array
     const addDog = () => {
-      // console.log("bang",this.state.list);
-      if (this.state.visible && !this.props.windowOpen) {
+      //check if the window is visible. if it's not, don't add more.
+      if (this.props.isVisible && !this.props.windowOpen) {
         this.setState((prevState) => ({
-          list: [...prevState.list, <Dog />]
+          list: [...prevState.list, <Dog key={Date.now()}/>]
         }))
       }
     }
 
     const removeDog = () => {
+      //check if the window is visible, if it's not, don't remove stuff.
+      if (this.state.list.length >= maxDogs && this.props.isVisible) {
       this.setState((prevState) => {
-        prevState.list.shift() ;
+        let newDogs = prevState.list;
+        newDogs.shift();
+        console.log(newDogs);
         return(
           {
-            list: prevState.list
+            list: newDogs
           })
         })
-        console.log("removal", this.state.list)
       }
+    }
 
       //every 1000 add dog
-      setInterval(() => addDog(), 8000)
+      setInterval(() => addDog(), spawnTime)
       //wait for 10s, remove a dog every second thereafter
-      // setTimeout(() => setInterval(() => removeDog(), 1000), 10000)
+      setTimeout(() => setInterval(() => removeDog(), spawnTime), spawnTime*maxDogs)
       //add a dog when the component has mounted, which will be paused by redux state
       addDog()
     }
 
-    handleVisibilityChange = isVisible => {
-      this.setState({visible: isVisible})
-      this.forceUpdate();
-    }
-
     render() {
       return (
-        <PageVisibility onChange={this.handleVisibilityChange}>
         <div>
         {this.state.list.map((data, index) => {
-          return <Dog />
+          return (
+            data
+          )
         })}
         </div>
-        </PageVisibility >
 
       )
     }
@@ -65,7 +65,8 @@ class DogSpawner extends Component {
 
 const mapStateToProps = state => {
   return {
-    windowOpen: state.windowClose.windowOpen
+    windowOpen: state.windowClose.windowOpen,
+    isVisible: state.windowVisibility.isVisible
   }
 }
 
