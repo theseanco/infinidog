@@ -7,9 +7,11 @@ import { createStore, combineReducers } from 'redux';
 import * as serviceWorker from './serviceWorker';
 
 import closeWindowReducer from './store/reducers/closeWindowReducer';
+import pausePlayReducer from './store/reducers/pausePlayReducer';
 
 const reducerFunction = combineReducers({
-  windowClose: closeWindowReducer
+  windowClose: closeWindowReducer,
+  pausePlay: pausePlayReducer
 })
 
 const store = createStore(reducerFunction);

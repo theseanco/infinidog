@@ -73,6 +73,7 @@
   background-color: rgba(255,255,255,0.4);
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
+  outline: none;
   box-sizing: border-box;
   text-decoration: none;
   font-family: 'Bungee', cursive;
