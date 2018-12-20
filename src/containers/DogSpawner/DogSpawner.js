@@ -15,31 +15,38 @@ class DogSpawner extends Component {
   }
 
   componentDidMount() {
+    //variables controlling the rate at which dogs are spawned.
+    let spawnTime = 700, maxDogs = 20;
     //a function to add dog to the end of the array
     const addDog = () => {
       // console.log("bang",this.state.list);
       if (this.state.visible && !this.props.windowOpen) {
         this.setState((prevState) => ({
-          list: [...prevState.list, <Dog />]
+          list: [...prevState.list, <Dog key={Date.now()}/>]
         }))
+        console.log(this.state.list)
       }
     }
 
     const removeDog = () => {
+      if (this.state.list.length >= maxDogs && this.state.visible) {
       this.setState((prevState) => {
-        prevState.list.shift() ;
+        let newDogs = prevState.list;
+        newDogs.shift();
+        console.log(newDogs);
         return(
           {
-            list: prevState.list
+            list: newDogs
           })
         })
         console.log("removal", this.state.list)
       }
+    }
 
       //every 1000 add dog
-      setInterval(() => addDog(), 8000)
+      setInterval(() => addDog(), spawnTime)
       //wait for 10s, remove a dog every second thereafter
-      // setTimeout(() => setInterval(() => removeDog(), 1000), 10000)
+      setTimeout(() => setInterval(() => removeDog(), spawnTime), spawnTime*maxDogs)
       //add a dog when the component has mounted, which will be paused by redux state
       addDog()
     }
@@ -54,7 +61,9 @@ class DogSpawner extends Component {
         <PageVisibility onChange={this.handleVisibilityChange}>
         <div>
         {this.state.list.map((data, index) => {
-          return <Dog />
+          return (
+            data
+          )
         })}
         </div>
         </PageVisibility >

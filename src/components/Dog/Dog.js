@@ -53,8 +53,6 @@ class Dog extends React.Component {
     //set state to be written to animation duration
     this.setState({animation: randomNum})
     //after 21 seconds (max animation time), render null
-    setTimeout(() => this.setState({renderComponent: false}), 21000)
-
   }
 
   handleImageLoaded() {
@@ -95,8 +93,6 @@ class Dog extends React.Component {
     }
     //check if the dog is visible
     this.state.isVisible ? visibleClasses = '' : visibleClasses = 'notVisible';
-
-    console.log(`${divClasses} ${visibleClasses}`)
 
     //conditional rendering - using setTimeout to "unmount" components after x seconds
     if (renderComponent) {
