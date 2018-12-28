@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Sound from 'react-sound';
-import SoundModule from '../../components/SoundModule/SoundModule'
 import './Music.css'
 import { connect } from 'react-redux';
 
@@ -18,8 +17,8 @@ class Music extends Component {
   }
 
   render() {
-    let soundPlaying, className;
 
+    let soundPlaying, className;
     //is the sound playing?
     if(this.props.playMusic && !this.props.windowOpen){
       soundPlaying = Sound.status.PLAYING;
@@ -35,7 +34,7 @@ class Music extends Component {
     <button className="muteButton" type="button" onClick={this.props.pausePlay} ><i className={className}/></button>
     <Sound
       url="https://github.com/theseanco/infinidog/blob/master/music/rolem_-_Neoishiki.mp3?raw=true"
-      playStatus={Sound.status.STOPPED}
+      playStatus={soundPlaying}
       playFromPosition={0 /* in milliseconds */}
       volume={100}
       loop={true}

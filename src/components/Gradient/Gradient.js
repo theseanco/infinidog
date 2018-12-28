@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import infiniteGradients from 'infinite-gradients'
 
 class Gradient extends React.Component {

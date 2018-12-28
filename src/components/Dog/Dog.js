@@ -4,9 +4,8 @@ This component renders a single dog!
 
 */
 
-import React, {Component} from 'react'
+import React from 'react'
 import './Dog.css'
-import PageVisibility from 'react-page-visibility'
 import { connect } from 'react-redux';
 
 
@@ -65,15 +64,14 @@ class Dog extends React.Component {
     } = this.props
 
     let dogRender,
-    showImage = null,
     divClasses = 'dogDiv paused',
     renderComponent = this.state.renderComponent,
     visibleClasses = '';
 
     if(this.state.dogType === 'image') {
-      dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)}/>
+      dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)} alt="Dog"/>
     } else if (this.state.dogType === 'video') {
-      dogRender = <video src={this.state.dog} autoPlay loop muted/>
+      dogRender = <video src={this.state.dog} autoPlay loop muted alt="Dog Video"/>
     } else {
       dogRender = null
     }

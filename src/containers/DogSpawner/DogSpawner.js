@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Dog from '../../components/Dog/Dog';
-import PageVisibility from 'react-page-visibility';
 import { connect } from 'react-redux';
 
 class DogSpawner extends Component {
@@ -15,7 +14,7 @@ class DogSpawner extends Component {
 
   componentDidMount() {
     //variables controlling the rate at which dogs are spawned.
-    let spawnTime = 700, maxDogs = 30;
+    let spawnTime = 1000, maxDogs = 30;
     //a function to add dog to the end of the array
     const addDog = () => {
       //check if the window is visible. if it's not, don't add more.
