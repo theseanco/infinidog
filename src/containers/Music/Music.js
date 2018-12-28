@@ -36,7 +36,7 @@ class Music extends Component {
       url="https://github.com/theseanco/infinidog/blob/master/music/rolem_-_Neoishiki.mp3?raw=true"
       playStatus={soundPlaying}
       playFromPosition={0 /* in milliseconds */}
-      volume={100}
+      volume={70}
       loop={true}
     />
     </div>
