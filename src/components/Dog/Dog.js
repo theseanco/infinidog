@@ -37,7 +37,7 @@ class Dog extends React.Component {
         // console.log(result);
         //height is max 80% of window height, so that dogs don't render offscreen,
         let height = Math.random() * (window.innerHeight*0.8);
-        let width = Math.random() * (window.innerWidth * 0.5);
+        let width = Math.random() * (window.innerWidth * 0.8) - (window.innerWidth * 0.2);
 
         //offload results from API call to state
         this.setState({
@@ -92,12 +92,11 @@ class Dog extends React.Component {
     if(this.props.screenType === 'landscape') {
       inlineStyle = {top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}
     } else if (this.props.screenType === 'portrait') {
-      inlineStyle = {left: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}
+      inlineStyle = {left: `${this.state.width}px`, animationDuration: `${this.state.animation}s`}
     }
 
     //conditional rendering - using setTimeout to "unmount" components after x seconds
     if (renderComponent) {
-      console.log(this.props.screenType)
       return(
           <div className={`${divClasses} ${visibleClasses}`} style={inlineStyle} >
             {dogRender}

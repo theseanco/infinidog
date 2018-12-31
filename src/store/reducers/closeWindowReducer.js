@@ -7,7 +7,6 @@ const initialState = {
 const closeWindowReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CLOSE_INTRO_WINDOW:
-      console.log("intro window closed!");
       return {
         ...state,
         windowOpen: false
