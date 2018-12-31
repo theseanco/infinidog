@@ -7,7 +7,6 @@ const initialState = {
 const pausePlayReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.PAUSE_PLAY_MUSIC:
-      console.log(state.musicPlaying)
       return {
         ...state,
         musicPlaying: !state.musicPlaying

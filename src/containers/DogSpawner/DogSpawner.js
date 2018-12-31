@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Dog from '../../components/Dog/Dog';
 import { connect } from 'react-redux';
+//Use react MediaQueries to pass down an orientation prop to the Dog component.
 
 class DogSpawner extends Component {
 
@@ -17,10 +18,21 @@ class DogSpawner extends Component {
     let spawnTime = 1000, maxDogs = 30;
     //a function to add dog to the end of the array
     const addDog = () => {
-      //check if the window is visible. if it's not, don't add more.
+      let orientation;
+
+      //Check the window width, and use it to switch between portrait and landscape animations, passed via props to Dog.
+      if(window.innerWidth < 768) {
+        orientation = "portrait"
+      } else {
+        orientation = "landscape"
+      }
+      /*
+
+      TODO: In a normal Chrome window, `matches` always returns True, but in Responsive Dev mode it doesn't. Unsure why this is, but maybe changing this to use `window.innerHeight` would work.
+      */
       if (this.props.isVisible && !this.props.windowOpen) {
         this.setState((prevState) => ({
-          list: [...prevState.list, <Dog key={Date.now()}/>]
+          list: [...prevState.list, <Dog key={Date.now()} screenType={orientation} />]
         }))
       }
     }
@@ -31,7 +43,6 @@ class DogSpawner extends Component {
       this.setState((prevState) => {
         let newDogs = prevState.list;
         newDogs.shift();
-        console.log(newDogs);
         return(
           {
             list: newDogs
