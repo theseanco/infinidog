@@ -37,6 +37,7 @@ class Dog extends React.Component {
         // console.log(result);
         //height is max 80% of window height, so that dogs don't render offscreen,
         let height = Math.random() * (window.innerHeight*0.8);
+        let width = Math.random() * (window.innerWidth * 0.5);
 
         //offload results from API call to state
         this.setState({
@@ -44,6 +45,7 @@ class Dog extends React.Component {
           dog: result,
           dogType: dogType,
           height: height,
+          width: width,
           renderComponent: true
         })
       }
@@ -66,7 +68,8 @@ class Dog extends React.Component {
     let dogRender,
     divClasses = 'dogDiv paused',
     renderComponent = this.state.renderComponent,
-    visibleClasses = '';
+    visibleClasses = '',
+    inlineStyle;
 
     if(this.state.dogType === 'image') {
       dogRender = <img src={this.state.dog} onLoad={this.handleImageLoaded.bind(this)} alt="Dog"/>
@@ -85,10 +88,18 @@ class Dog extends React.Component {
     //check if the dog is visible
     this.props.isVisible ? visibleClasses = '' : visibleClasses = 'notVisible';
 
+    //change style based on orientation
+    if(this.props.screenType === 'landscape') {
+      inlineStyle = {top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}
+    } else if (this.props.screenType === 'portrait') {
+      inlineStyle = {left: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}
+    }
+
     //conditional rendering - using setTimeout to "unmount" components after x seconds
     if (renderComponent) {
+      console.log(this.props.screenType)
       return(
-          <div className={`${divClasses} ${visibleClasses}`} style={{top: `${this.state.height}px`, animationDuration: `${this.state.animation}s`}} >
+          <div className={`${divClasses} ${visibleClasses}`} style={inlineStyle} >
             {dogRender}
           </div>
       )

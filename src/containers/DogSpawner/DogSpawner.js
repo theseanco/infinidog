@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Dog from '../../components/Dog/Dog';
 import { connect } from 'react-redux';
+//Use react MediaQueries to pass down an orientation prop to the Dog component.
+import MediaQuery from 'react-responsive';
 
 class DogSpawner extends Component {
 
@@ -18,9 +20,30 @@ class DogSpawner extends Component {
     //a function to add dog to the end of the array
     const addDog = () => {
       //check if the window is visible. if it's not, don't add more.
+      //The list returns a set of MediaQuery divs which determine the orientation of the device
+      //Not sure if it's best to return MediaQueries, or just send a prop to each Dog.
+      //The latter will make the app less responsive if orientation is changed. But that is unlikely.
+      /*
+
+      TODO: In a normal Chrome window, `matches` always returns True, but in Responsive Dev mode it doesn't. Unsure why this is, but maybe changing this to use `window.innerHeight` would work.
+      */
       if (this.props.isVisible && !this.props.windowOpen) {
         this.setState((prevState) => ({
-          list: [...prevState.list, <Dog key={Date.now()}/>]
+          list: [...prevState.list,
+            <MediaQuery minDeviceWidth={768} key={Date.now()}>
+              {(matches) => {
+                if(matches) {
+                  return(
+                    <Dog key={Date.now()} screenType={'landscape'}/>
+                  )
+              } else {
+                return(
+                  <Dog key={Date.now()} screenType={'portrait'}/>
+                )
+              }}
+              }
+            </MediaQuery>
+          ]
         }))
       }
     }

@@ -8,13 +8,27 @@
   height: auto
 }
 
+
+/*Media query for dog divs to change animation based on mobile/desktop*/
 .dogDiv {
   position: absolute;
-  max-height: 25%;
-  max-width: 25%;
+  max-width: 50%;
   animation-duration: 8s;
-  animation-name: slidein;
+  animation-name: slidein-top;
   animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+@media only screen and (min-width: 768px) {
+  .dogDiv {
+    position: absolute;
+    max-height: 25%;
+    max-width: 25%;
+    animation-duration: 8s;
+    animation-name: slidein-side;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+  }
 }
 
 .paused {
@@ -30,7 +44,7 @@
 }
 
 
-@keyframes slidein {
+@keyframes slidein-side {
   from {
     margin-left: -50%;
     width: 100%;
@@ -39,5 +53,15 @@
   to {
     margin-left: 150%;
     width: 300%;
+  }
+}
+
+@keyframes slidein-top{
+  from {
+    top: -50%;
+  }
+
+  to {
+    top: 150%;
   }
 }
