@@ -15,7 +15,7 @@ class DogSpawner extends Component {
 
   componentDidMount() {
     //variables controlling the rate at which dogs are spawned.
-    let spawnTime = 1000, maxDogs = 30;
+    let spawnTime = 1000, maxDogs = 45;
     //a function to add dog to the end of the array
     const addDog = () => {
       let orientation;
