@@ -1,0 +1,13 @@
+{
+  "main.css": "/infinidog/static/css/main.60f20783.chunk.css",
+  "main.js": "/infinidog/static/js/main.64537be2.chunk.js",
+  "main.js.map": "/infinidog/static/js/main.64537be2.chunk.js.map",
+  "static/js/1.3b5f9931.chunk.js": "/infinidog/static/js/1.3b5f9931.chunk.js",
+  "static/js/1.3b5f9931.chunk.js.map": "/infinidog/static/js/1.3b5f9931.chunk.js.map",
+  "runtime~main.js": "/infinidog/static/js/runtime~main.5970e1e8.js",
+  "runtime~main.js.map": "/infinidog/static/js/runtime~main.5970e1e8.js.map",
+  "static/css/main.60f20783.chunk.css.map": "/infinidog/static/css/main.60f20783.chunk.css.map",
+  "index.html": "/infinidog/index.html",
+  "precache-manifest.fa8e4d68122b78555d20e5e41cf377a6.js": "/infinidog/precache-manifest.fa8e4d68122b78555d20e5e41cf377a6.js",
+  "service-worker.js": "/infinidog/service-worker.js"
+}
